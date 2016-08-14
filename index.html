@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Airports</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="airportsApp" ng-controller="ApplicationCtrl">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Airports
+            </a>
+        </div>
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="city-search-field">City</span>
+                <input type="text" class="form-control" placeholder="Aberdeen" aria-describedby="city-search-field" ng-model="citySearchField">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="country-search-field">Country</span>
+                <input type="text" class="form-control" placeholder="United Kingdom" aria-describedby="country-search-field" ng-model="countrySearchField">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="iata-search-field">IATA</span>
+                <input type="text" class="form-control" placeholder="BFS" aria-describedby="iata-search-field" ng-model="iataSearchField">
+            </div>
+        </form>
+    </div>
+</nav>
+
+<div class="container container-fluid">
+
+    <div class="page-header">
+        <h1>Airports</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-6"
+                 ng-repeat="airport in airports | filter:{city:citySearchField} | filter:{country:countrySearchField} | filter:{iata:iataSearchField}"
+                 ng-show="citySearchField.length || countrySearchField.length || iataSearchField.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{airport.name}}</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li ng-repeat="property in airport_properties">{{property}}: {{airport[property]}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
